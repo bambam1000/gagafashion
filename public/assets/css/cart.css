@@ -1,0 +1,35 @@
+.cart{
+    margin-top: 10%;
+    margin-bottom: 20%;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+     
+}
+.cart .table{
+  border: 1px solid gray;
+ 
+}
+.cart .table thead{
+    background-color: orange;
+    color: white;
+    border: 1px solid orange;
+}
+.cart button{
+    background: orange;
+    color: white;
+    font-weight: bold;
+}
+.cart button:hover{
+    background:#f39c12 ;
+}    
+@media (max-width:750px) {
+    .cart{
+        margin-top: 20%;
+        margin-bottom: 40%;
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+         
+    }
+}

@@ -1,0 +1,79 @@
+body{
+    overflow-x: hidden;
+}
+.html{
+    overflow-x: hidden;
+
+}
+.jumbotron {
+    margin-bottom: 4rem;
+}
+.propos img{
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.banner {
+    position: relative;
+    height: 50vh;
+    background-image: url('/assets/img/hero-carousel/1.jpg');
+    background-size: cover;
+    background-position: center center;
+
+  }
+  
+  .banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+
+  }
+  
+  .banner-caption {
+    margin-top: 150px;
+    position: relative;
+
+  }
+  
+  .banner-caption h1 {
+    font-size: 48px;
+    font-weight: bold;
+  }
+  
+  .banner-caption p {
+    font-size: 24px;
+    color: orange;
+
+  }
+  
+  .banner-caption h1, .banner-caption p {
+    text-shadow: 2px 2px #000;
+  }
+
+
+   
+.banner #reseau{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);   
+    width: 80%;
+  }
+  
+   
+  .banner #reseau a {
+    color: #fff;
+    font-size: 35px;
+    margin: 0 10px; 
+    transition: color 0.5s;
+  
+  }
+  .banner #reseau a:first-child{
+   color: #20bf6b;
+  }
+  .banner #reseau a:last-child{
+  color: #3867d6;
+  }
+  
