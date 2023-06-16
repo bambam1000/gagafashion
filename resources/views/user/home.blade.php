@@ -157,7 +157,6 @@ Accueil-GagaFashion
           <a href="{{ route('productdetail', ['id' => $product->id]) }}">
             <div class="product">
               <img class="img " src="{{ $product->image }}" alt="Product 1">
-              <div class="product-img" style="background-image: url({{ $product->image }});"></div>
               <div class="info">
                 <div class="">
                   <div class="nom">
@@ -167,14 +166,14 @@ Accueil-GagaFashion
                     <p>{{ $product->price }} $</p>
                   </div>
                   <div class="form">
-                    <form action="{{url('addcard',$product->id)}} " method="POST">
-                      @csrf
-                      <div class="form-group" hidden="">
+                  <form action="{{url('addcard',$product->id)}} " method="POST">
+                    @csrf
+                    <div class="form-group" hidden="">
                         <label for="quantity">Quantité :</label>
                         <input type="number" name="quantity" id="quantity" class="form-control" value="1" min="1">
                       </div>
-                      <button class="sub" type="submit">Buy <i class=" fa fa-plus"></i> </button>
-                    </form>
+                    <button style="border: none; background:#fff;" class="sub" type="submit">Buy <i class=" fa fa-plus"></i> </button>
+                  </form>
                   </div>
 
                 </div>

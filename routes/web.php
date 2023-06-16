@@ -65,6 +65,8 @@ Route::get('/deleteproduct/{id}',[AdminController::class, 'deleteproduct'])->nam
 Route::get('/productedit/{product}/edit',[AdminController::class, 'productedit'])->name('productedit');
 Route::post('/productupdate/{id}',[AdminController::class, 'productupdate'])->name('productupdate');
 Route::get('/product/search',[AdminController::class, 'searchproduct'])->name('product.search');
+Route::get('/deliveredorders', [AdminController::class,'showDeliveredOrders'])->name('deliveredorders');
+
 
 
 /**  Category route */

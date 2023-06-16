@@ -38,7 +38,7 @@ Product-Detail-GagaFashion
               <div class="info">
                 <div class="">
                   <div class="nom">
-                    <p>{{ $categoryProduct->name }} </p>
+                    <p>{{$categoryProduct->name }} </p>
                   </div>
                   <div class="price">
                     <p>{{ $categoryProduct->price }} $</p>
@@ -46,8 +46,11 @@ Product-Detail-GagaFashion
                   <div class="form">
                   <form action="{{url('addcard',$product->id)}} " method="POST">
                     @csrf
-                     
-                    <button class="sub" type="submit">Buy <i class=" fa fa-plus"></i> </button>
+                    <div class="form-group" hidden="">
+                        <label for="quantity">Quantité :</label>
+                        <input type="number" name="quantity" id="quantity" class="form-control" value="1" min="1">
+                      </div>
+                    <button style="border: none; background:#fff;" class="sub" type="submit">Buy <i class=" fa fa-plus"></i> </button>
                   </form>
                   </div>
 
