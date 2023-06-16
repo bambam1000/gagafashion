@@ -140,15 +140,17 @@
                         <a href="{{url('showorder')}}" class="menu-link">
 
                             <i class='menu-icon tf-icons bx bx-run'></i>
-                            <div data-i18n="Analytics">Pending-Orders</div>
+                            <div data-i18n="Analytics">Orders Pedding</div>
                         </a>
                     </li>
                     <li class="menu-item ">
-                        <a href="index.html" class="menu-link">
-                            <i class='menu-icon tf-icons bx bxs-hourglass-bottom'></i>
-                            <div data-i18n="Analytics">complete-orders</div>
+                        <a href="{{url('deliveredorders')}}" class="menu-link">
+
+                            <i class='menu-icon tf-icons bx bx-stop'></i>
+                            <div data-i18n="Analytics">Orders  Delivered</div>
                         </a>
                     </li>
+
 
 
                 </ul>
@@ -157,13 +159,13 @@
 
             <!-- Layout container -->
             <div class="layout-page">
-                 
+
 
                 <!-- / Navbar -->
 
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
-                
+                    
 
                     @yield('content')
                 </div>

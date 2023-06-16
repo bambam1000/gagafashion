@@ -101,8 +101,13 @@
             @endforeach  
           </tbody>
         </table>
-      </div>
+
+         
     </div>
+    <div class="d-flex justify-content-center" style="margin-bottom: 20px;">
+            {{ $products->links() }}
+          </div>
+      </div>
     <!-- Bootstrap Table with Header - Light -->
 
 

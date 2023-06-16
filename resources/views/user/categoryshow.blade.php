@@ -103,7 +103,7 @@ Category-GagaFashion
                         <label for="quantity">Quantité :</label>
                         <input type="number" name="quantity" id="quantity" class="form-control" value="1" min="1">
                       </div>
-                    <button class="sub" type="submit">Buy <i class=" fa fa-plus"></i> </button>
+                    <button style="border: none; background:#fff;" class="sub" type="submit">Buy <i class=" fa fa-plus"></i> </button>
                   </form>
                   </div>
 

@@ -19,29 +19,33 @@ class Homecontroller extends Controller
 {
     public function redirect()
     {
-
-        $usertype = Auth::user()->usertype;
-        if ($usertype == 'admin') {
-
-
-            return view('admin.home');
+        if (Auth::check()) {
+            $usertype = Auth::user()->usertype;
+            if ($usertype == 'admin') {
+                return view('admin.home');
+            } else {
+                $user = auth()->user();
+                $count = Cart::where('phone', optional($user)->phone)->count();
+                $products = Product::inRandomOrder()->paginate(30);
+                $categories = Category::orderBy('name', 'asc')->get();
+                return view('user.home', compact('categories', 'products', 'count'));
+            }
         } else {
-            $user = auth()->user();
-            $count = Cart::where('phone', $user->phone)->count();
-            $products =  Product::Paginate(16);
+            $products = Product::inRandomOrder()->paginate(16);
             $categories = Category::orderBy('name', 'asc')->get();
-            return view('user.home', compact('categories', 'products','count'));
+            return view('user.home', compact('categories', 'products'));
         }
     }
 
+    // Rest of your code...
+
+
     public function index()
     {
-
-        if (Auth::id()) {
+        if (Auth::check()) {
             return redirect('redirect');
         } else {
-            
-            $products =  Product::paginate(30);
+           $products =  Product::inRandomOrder()->paginate(16);
             $categories = Category::orderBy('name', 'asc')->get();
             return view('user.home', compact('categories', 'products'));
         }
@@ -53,7 +57,7 @@ class Homecontroller extends Controller
     public function show($id)
     {    
         $user = auth()->user();
-        $count = Cart::where('phone', $user->phone)->count();
+        $count = Cart::where('phone', optional($user)->phone)->count();
         $categorie = Category::orderBy('name', 'asc')->get();
         $categories = Category::find($id);
         $products = $categories->products()->Paginate(30);
@@ -66,7 +70,7 @@ class Homecontroller extends Controller
     public function showProductsBySubcategory($id)
     {
         $user = auth()->user();
-        $count = Cart::where('phone', $user->phone)->count();
+        $count = Cart::where('phone', optional($user)->phone)->count();
         $categorie = Category::orderBy('name', 'asc')->get();
         $subcategory = Subcategory::find($id);
         $products = $subcategory->products()->Paginate(30);
@@ -83,7 +87,7 @@ class Homecontroller extends Controller
 
     {
         $user = auth()->user();
-        $count = Cart::where('phone', $user->phone)->count();
+        $count = Cart::where('phone', optional($user)->phone)->count();
         $product = Product::findOrFail($id);
         $categoryProducts = Product::where('category_id', $product->category_id)->get();
 
@@ -161,7 +165,7 @@ class Homecontroller extends Controller
     public function about()
     {
         $user = auth()->user();
-        $count = Cart::where('phone', $user->phone)->count();
+        $count = Cart::where('phone', optional($user)->phone)->count();
         return view('user.about', compact('count'));
     }
 
@@ -169,7 +173,7 @@ class Homecontroller extends Controller
     public function contact()
     {
         $user = auth()->user();
-        $count = Cart::where('phone', $user->phone)->count();
+        $count = Cart::where('phone', optional($user)->phone)->count();
         return view('user.contact', compact('count'));
     }
 }

@@ -1,113 +1,114 @@
- 
+ @extends('admin.layouts.template');
 
 
 
-@extends('admin.layouts.template');
+ @section('content')
+
+
+ <div class="container">
+
+   <!-- Navbar -->
+
+   <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+       <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+         <i class="bx bx-menu bx-sm"></i>
+       </a>
+     </div>
+
+     <div class="navbar-nav-right d-flex align-items-center " id="navbar-collapse">
+       <!-- Search -->
+       <form style="padding-top: 10px;" action="{{ route('categories.search') }}" method="GET">
+         <div class="navbar-nav align-items-center">
+           <div class="nav-item d-flex align-items-center">
+             <i class="bx bx-search fs-4 lh-0"></i>
+             <input type="text" name="query" class="form-control border-0 shadow-none" placeholder="Search Categories..." aria-label="Search..." />
+           </div>
+         </div>
+       </form>
 
 
 
-@section('content')
 
+       <!-- /Search -->
 
-<div class="container">
-  
-<!-- Navbar -->
+       <ul class="navbar-nav flex-row align-items-center ms-auto">
+         <!-- Place this tag where you want the button to render. -->
+         <li class="nav-item lh-1 me-3">
 
-<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
-                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                            <i class="bx bx-menu bx-sm"></i>
-                        </a>
-                    </div>
+         </li>
 
-                    <div class="navbar-nav-right d-flex align-items-center " id="navbar-collapse">
-                        <!-- Search -->
-                        <form style="padding-top: 10px;" action="{{ route('categories.search') }}" method="GET">
-                        <div class="navbar-nav align-items-center">
-                            <div class="nav-item d-flex align-items-center">
-                                <i class="bx bx-search fs-4 lh-0"></i>
-                                <input type="text" name="query" class="form-control border-0 shadow-none" placeholder="Search Categories..." aria-label="Search..." />
-                            </div>
-                        </div>
-                        </form>
+         <!-- User -->
 
-                       
-     
-     
-                        <!-- /Search -->
+         <li>
+           <x-app-layout style="border: 1px solid black;">
 
-                        <ul class="navbar-nav flex-row align-items-center ms-auto">
-                            <!-- Place this tag where you want the button to render. -->
-                            <li class="nav-item lh-1 me-3">
+           </x-app-layout>
+         </li>
 
-                            </li>
-
-                            <!-- User -->
-
-                            <li>
-                                <x-app-layout style="border: 1px solid black;">
-
-                                </x-app-layout>
-                            </li>
-
-                        </ul>
-                    </div>
-                </nav>
+       </ul>
+     </div>
+   </nav>
 
    <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Page/</span>Oder Pedding </h4>
+     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Page/</span>Oder Pedding </h4>
 
 
-    <!-- Bootstrap Table with Header - Light -->
-    <div class="card">
-                <h5 class="card-header">List of Category </h5>
-               @if(session()->has('message'))
-                     <div class="alert alert-success">
-                         {{ session()->get('message')}}
-                     </div>
-               @endif
-                
-                <div class="table-responsive text-nowrap">
-                  <table class="table">
-                    <thead class="table-light">
-                      <tr>
-                        <th>Costomer Name</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                        <th>Price</th>
-                        <th>Product Name</th>
-                        <th>Quantity</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                       
-                    
-                     @foreach( $order as $orders)    
-                      <tr>
-                        <td><strong>{{$orders->name}}</strong></td>
-                        <td>{{$orders->phone}}  </td>
-                        <td>{{$orders->address}}  </td>
-                        <td>{{$orders->price}}  </td>
-                        <th> {{$orders->product_name}} </th>
-                        <td> {{$orders->quantity}}  </td>
-                        <td>{{$orders->status}}   </td>
-                        <td><a href="{{url('updatestatus', $orders->id)}} " class="btn btn-success">Delivered </a> </td>
-                         
-                         
-                      </tr>
-                    @endforeach
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <!-- Bootstrap Table with Header - Light -->
+     <!-- Bootstrap Table with Header - Light -->
+     <div class="card">
+       <h5 class="card-header">List of Category </h5>
+       @if(session()->has('message'))
+       <div class="alert alert-success">
+         {{ session()->get('message')}}
+       </div>
+       @endif
+
+       <div class="table-responsive text-nowrap">
+         <table class="table">
+           <thead class="table-light">
+             <tr>
+               <th>Costomer Name</th>
+               <th>Phone</th>
+               <th>Address</th>
+               <th>Price</th>
+               <th>Product Name</th>
+               <th>Quantity</th>
+               <th>Status</th>
+               <th>Action</th>
+             </tr>
+           </thead>
+           <tbody class="table-border-bottom-0">
+
+
+             @foreach( $order as $orders)
+             @if($orders->status !== 'delivred')
+             <tr>
+               <td><strong>{{$orders->name}}</strong></td>
+               <td>{{$orders->phone}} </td>
+               <td>{{$orders->address}} </td>
+               <td>{{$orders->price}} </td>
+               <th> {{$orders->product_name}} </th>
+               <td> {{$orders->quantity}} </td>
+               <td>{{$orders->status}} </td>
+               <td><a href="{{url('updatestatus', $orders->id)}} " class="btn btn-success">Delivered </a> </td>
+
+
+             </tr>
+             @endif
+             @endforeach
+           </tbody>
+         </table>
+       </div>
+       <div class="d-flex justify-content-center" style="margin: 20px 0px 10px 0px; ">
+         {{ $order->links() }}
+       </div>
+     </div>
+     <!-- Bootstrap Table with Header - Light -->
 
 
    </div>
- 
- 
 
 
-@endsection
+
+
+   @endsection

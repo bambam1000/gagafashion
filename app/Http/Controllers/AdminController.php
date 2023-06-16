@@ -7,6 +7,7 @@ use App\Models\category;
 use App\Models\Oder;
 use App\Models\product;
 use App\Models\subcategory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -15,8 +16,8 @@ class AdminController extends Controller
 {
     public function home()
     {    $user = auth()->user();
-        $count = Cart::where('phone', $user->phone)->count();
-        $products =  Product::paginate(16);
+        $count = Cart::where('phone', optional($user)->phone)->count();
+        $products = Product::inRandomOrder()->paginate(30);
         $categories = Category::orderBy('name', 'asc')->get();
         return view('user.home',compact('categories','products', 'count'));
     }
@@ -76,7 +77,7 @@ class AdminController extends Controller
     public function product()
     {
 
-        $products = Product::all();
+        $products = Product::latest()->paginate(5);
 
 
         return view('admin.product', compact('products'));
@@ -166,7 +167,7 @@ class AdminController extends Controller
 
     public function category()
     {
-        $categories = category::all();
+        $categories = DB::table('categories')->orderByDesc('created_at')->paginate(7);
         return view('admin.category', compact('categories'));
     }
 
@@ -240,7 +241,7 @@ class AdminController extends Controller
 
     public function subcategory()
     {
-        $subcategories = subcategory::all();
+        $subcategories = Subcategory::latest()->paginate(7);
         return view('admin.subcategory', compact('subcategories'));
     }
 
@@ -322,19 +323,34 @@ class AdminController extends Controller
 
     public function showorder(){
           
-        $order =Oder::all();
+        $order =Oder::latest()->paginate(7);
 
         return view('admin.showorder', compact('order'));
     }
 
     public function updatestatus($id){
 
+    // Mettre à jour le statut de la commande    
+
       $order=Oder::find($id);
       $order->status = 'delivred';
       $order->save();
 
-      return redirect()->back();
+      // Déplacer la commande vers une autre page (par exemple, une table "delivered_orders")
+    $deliveredOrder = $order->replicate();
+    $deliveredOrder->save();
+    $order->delete();
+
+    return redirect()->back()->with('message', 'Order status updated successfully');
 
     }
+
+    public function showDeliveredOrders()
+{
+    // Récupérer les commandes livrées depuis la base de données
+    $deliveredorders = Oder::where('status', 'delivred')->paginate(5);
+
+    return view('admin.deliveredorders', compact('deliveredorders'));
+}
 
 }
